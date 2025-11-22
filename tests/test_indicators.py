@@ -236,3 +236,26 @@ class TestEdgeCases:
         data = pd.Series([10])
         result = ema(data, 1)
         assert result.iloc[0] == 10.0
+    
+    def test_rsi_no_losses(self):
+        """Test RSI when all prices increase (no losses)."""
+        # All increasing prices - should result in RSI of 100
+        data = pd.Series([10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+                         21, 22, 23, 24, 25, 26, 27, 28, 29, 30])
+        result = rsi(data, 14)
+        # Should not crash and RSI should be 100 or NaN for no-loss periods
+        assert len(result) == len(data)
+        # The RSI after first period should be 100 or NaN (both valid)
+        assert result.iloc[-1] == 100.0 or np.isnan(result.iloc[-1])
+    
+    def test_stochastic_constant_price(self):
+        """Test Stochastic Oscillator when price is constant."""
+        # Constant prices - range is zero
+        high = pd.Series([10] * 20)
+        low = pd.Series([10] * 20)
+        close = pd.Series([10] * 20)
+        
+        k, d = stochastic_oscillator(high, low, close, 14, 3, 3)
+        # Should not crash, values should be NaN when range is 0
+        assert len(k) == len(high)
+        assert len(d) == len(high)

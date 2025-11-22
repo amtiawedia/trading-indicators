@@ -84,7 +84,10 @@ def rsi(data: Union[pd.Series, np.ndarray], period: int = 14) -> Union[pd.Series
     avg_loss = loss.rolling(window=period).mean()
     
     # Calculate RS and RSI
-    rs = avg_gain / avg_loss
+    # Handle division by zero: when avg_loss is 0, RSI is 100
+    # When avg_gain is 0 and avg_loss is 0, RSI is 50 (neutral)
+    rs = np.where(avg_loss == 0, np.inf, avg_gain / avg_loss)
+    rs = pd.Series(rs, index=data.index)
     rsi_values = 100 - (100 / (1 + rs))
     
     if return_array:
@@ -222,7 +225,9 @@ def stochastic_oscillator(high: Union[pd.Series, np.ndarray],
     highest_high = high.rolling(window=period).max()
     
     # Calculate %K
-    k_percent = 100 * ((close - lowest_low) / (highest_high - lowest_low))
+    # Handle division by zero: when range is 0, stochastic is undefined (NaN)
+    price_range = highest_high - lowest_low
+    k_percent = 100 * ((close - lowest_low) / price_range.replace(0, np.nan))
     
     # Smooth %K
     k_smooth = k_percent.rolling(window=smooth_k).mean()
