@@ -1,4 +1,4 @@
-//@version=5
+//@version=6
 indicator("Lux Algo Signals & Overlays [6.1]", "LuxAlgo", overlay = true, max_labels_count = 500)
 
 //Import libraries
@@ -7,29 +7,13 @@ import ayvaliktrading/JoinUsEyopsTelegram/1 as kernels
 
 // # ============================[GET USERS INPUT]============================ #
 groupBasic = "BASIC SETTINGS"
-showSignals = input(true, "Show Signals", inline = "1", group = groupBasic, tooltip
-= "Enables or disables the signals")
-signalPresets = input.string("None", "Presets / Filters", ["None", "Trend Trader
-[Preset]","Scalper [Preset]", "Swing Trader [Preset]", "Contrarian Trader
-[Preset]", "Smart Trail [Filter]", "Trend Tracer [Filter]", "Trend Strength
-[Filter]", "Trend Catcher [Filter]", "Neo Cloud [Filter]"],tooltip = "Automatically
-sets settings or filters for a given category", group= groupBasic)
-signalMode = input.string("Confirmation + Exits", "Signal Mode", ["Confirmation +
-Exits", "Contrarian + Exits", "None"],tooltip = "Changes the Mode of the
-signals" ,group = groupBasic)
-signalClassifier = input(true,"AI Signal Classifer",tooltip = "Shows signal quality
-from 1-4 on signals" ,group = groupBasic)
-sensitivity = input.float(5, "Signal Sensitivity ", minval = 1, maxval = 26,step=1,
-tooltip = "Changes the sensetivity of the signals, the lower this setting the more
-short term signals you will get, while a higher number will result in longer term
-signals.",group = groupBasic)
-atrLength = input.int(10, "Signal Tuner ", minval = 1, maxval = 25,step=1,tooltip =
-"Alows you to tune your signals, the higher the number the more refined but laggier
-the signal" ,group = groupBasic)
-candleColorType = input.string("Confirmation Simple", "Candle Coloring",
-["Confirmation Simple","Confirmation Gradient","Contrarian
-Gradient","None"],tooltip = "Changes the type of signal coloring", group =
-groupBasic)
+showSignals = input(true, "Show Signals", inline = "1", group = groupBasic, tooltip = "Enables or disables the signals")
+signalPresets = input.string("None", "Presets / Filters", ["None", "Trend Trader [Preset]","Scalper [Preset]", "Swing Trader [Preset]", "Contrarian Trader [Preset]", "Smart Trail [Filter]", "Trend Tracer [Filter]", "Trend Strength [Filter]", "Trend Catcher [Filter]", "Neo Cloud [Filter]"],tooltip = "Automatically sets settings or filters for a given category", group= groupBasic)
+signalMode = input.string("Confirmation + Exits", "Signal Mode", ["Confirmation + Exits", "Contrarian + Exits", "None"],tooltip = "Changes the Mode of the signals" ,group = groupBasic)
+signalClassifier = input(true,"AI Signal Classifer",tooltip = "Shows signal quality from 1-4 on signals" ,group = groupBasic)
+sensitivity = input.float(5, "Signal Sensitivity ", minval = 1, maxval = 26,step=1, tooltip = "Changes the sensetivity of the signals, the lower this setting the more short term signals you will get, while a higher number will result in longer term signals.",group = groupBasic)
+atrLength = input.int(10, "Signal Tuner ", minval = 1, maxval = 25,step=1,tooltip = "Alows you to tune your signals, the higher the number the more refined but laggier the signal" ,group = groupBasic)
+candleColorType = input.string("Confirmation Simple", "Candle Coloring", ["Confirmation Simple","Confirmation Gradient","Contrarian Gradient","None"],tooltip = "Changes the type of signal coloring", group = groupBasic)
 
 // Indicator Overlay Settings
 groupOverlay = "INDICATOR OVERLAY"
@@ -39,27 +23,17 @@ neoCloud = input(false, "Neo Cloud", inline = "3", group = groupOverlay)
 reversalZone = input(true, "Reversal Zones", inline = "1", group = groupOverlay)
 trendTracer = input(false, "Trend Tracer", inline = "2", group = groupOverlay)
 showDashboard = input(true, "Dashboard", inline = "3", group = groupOverlay)
-showTrailingStoploss = input(false, "Trailing Stoploss", inline = "4", group =
-groupOverlay)
-showMovingAverage = input(false, "AI Moving Average", inline = "4", group =
-groupOverlay)
+showTrailingStoploss = input(false, "Trailing Stoploss", inline = "4", group = groupOverlay)
+showMovingAverage = input(false, "AI Moving Average", inline = "4", group = groupOverlay)
 showSessions = input(false, "Sessions", inline = "5", group = groupOverlay)
 
 // Advanced Settings
 groupAdvanced = "ADVANCED SETTINGS"
-takeProfitBoxes = input.string("Off", "TP/SL Points", options=["Off","On"], inline
-= "2", tooltip = "Shows Take Profit and Stop Loss areas",group = groupAdvanced)
-takeProfitStopLossDistance = input.int(5,"", minval = 1, maxval = 10, inline = "2",
-group=groupAdvanced)
-autopilotMode = input.string("Off", "Autopilot Sensivity",["Off","Short-Term",
-"Mid-Term", "Long-Term"],tooltip = "Sets automatic settings for signals and
-improves their quality" ,inline = "3", group = groupAdvanced)
-dashboardLocation = input.string("Bottom Right","Dashboard Location", ["Top
-Right","Bottom Right","Bottom Left"], inline = "4",tooltip = "Changes dashboard
-positions" ,group = groupAdvanced)
-dashboardSize = input.string("Normal","Dashboard Size",
-["Tiny","Small","Normal","Large"], inline = "5",tooltip = "Changes the size of the
-dashboard" ,group = groupAdvanced)
+takeProfitBoxes = input.string("Off", "TP/SL Points", options=["Off","On"], inline = "2", tooltip = "Shows Take Profit and Stop Loss areas",group = groupAdvanced)
+takeProfitStopLossDistance = input.int(5,"", minval = 1, maxval = 10, inline = "2", group=groupAdvanced)
+autopilotMode = input.string("Off", "Autopilot Sensivity",["Off","Short-Term", "Mid-Term", "Long-Term"],tooltip = "Sets automatic settings for signals and improves their quality" ,inline = "3", group = groupAdvanced)
+dashboardLocation = input.string("Bottom Right","Dashboard Location", ["Top Right","Bottom Right","Bottom Left"], inline = "4",tooltip = "Changes dashboard positions" ,group = groupAdvanced)
+dashboardSize = input.string("Normal","Dashboard Size", ["Tiny","Small","Normal","Large"], inline = "5",tooltip = "Changes the size of the dashboard" ,group = groupAdvanced)
 
 if (signalPresets == "Trend Trader [Preset]")
     smartTrail := true
@@ -1069,7 +1043,7 @@ last5Neo = ta.sma(lastNeo, 2)
 plot(close,'Chikou',chikou_css,offset=-offset+1,display=display.none, editable
 =false)
 
-//@version=5
+//@version=6
 indicator("Meu Indicador", overlay=true)
 
 // Wylicz pozycje kwadratu
