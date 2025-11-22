@@ -197,13 +197,10 @@ get_range(session, session_name, session_css)=>
         max := high
         min := low
 
-        bx := box.new(n, max, n, min, bgcolor = color.new(session_css, bg_transp),
-border_color = show_outline ? session_css : na, border_style = line.style_dotted)
+        bx := box.new(n, max, n, min, bgcolor = color.new(session_css, bg_transp), border_color = show_outline ? session_css : na, border_style = line.style_dotted)
 
     if show_txt and showSessions
-        lbl := label.new(t, max, session_name, xloc = xloc.bar_time, textcolor =
-session_css, style = label.style_label_down, color = color.new(color.white, 100),
-size = size.tiny)
+        lbl := label.new(t, max, session_name, xloc = xloc.bar_time, textcolor = session_css, style = label.style_label_down, color = color.new(color.white, 100), size = size.tiny)
 
       if session and session == session[1] and showSessions
           max := math.max(high, max)
@@ -266,59 +263,21 @@ if show_sesb and sesb_avg
 //Plots
 //-----------------------------------------------------------------------------{
 //Plot max/min
-plot(showSessions and sesa_maxmin ? max_sesa : na, 'Session A Maximum', sesa_css,
-1, plot.style_linebr, editable = false)
-plot(showSessions and sesa_maxmin ? min_sesa : na, 'Session A Minimum', sesa_css,
-1, plot.style_linebr, editable = false)
+plot(showSessions and sesa_maxmin ? max_sesa : na, 'Session A Maximum', sesa_css, 1, plot.style_linebr, editable = false)
+plot(showSessions and sesa_maxmin ? min_sesa : na, 'Session A Minimum', sesa_css, 1, plot.style_linebr, editable = false)
 
-plot(showSessions and   sesb_maxmin ? max_sesb : na, 'Session B Maximum', sesb_css,
-1, plot.style_linebr,   editable = false)
-plot(showSessions and   sesb_maxmin ? min_sesb : na, 'Session B Minimum', sesb_css,
-1, plot.style_linebr,   editable = false)
+plot(showSessions and   sesb_maxmin ? max_sesb : na, 'Session B Maximum', sesb_css, 1, plot.style_linebr,   editable = false)
+plot(showSessions and   sesb_maxmin ? min_sesb : na, 'Session B Minimum', sesb_css, 1, plot.style_linebr,   editable = false)
 
 //Plot Divider A
-plotshape(is_sesa and show_ses_div and show_sesa and showSessions, "·"
-  , shape.square
-  , location.bottom
-  , na
-  , text = "."
-  , textcolor = sesa_css
-  , size = size.tiny
-  , display = display.all - display.status_line
-  , editable = false)
+plotshape(is_sesa and show_ses_div and show_sesa and showSessions, "·" , shape.square , location.bottom , na , text = "." , textcolor = sesa_css , size = size.tiny , display = display.all - display.status_line , editable = false)
 
-plotshape(is_sesa != is_sesa[1] and show_ses_div and show_sesa and showSessions,
-"NYE"
-  , shape.labelup
-  , location.bottom
-  , na
-  , text = "?"
-  , textcolor = sesa_css
-  , size = size.tiny
-  , display = display.all - display.status_line
-  , editable = false)
+plotshape(is_sesa != is_sesa[1] and show_ses_div and show_sesa and showSessions, "NYE" , shape.labelup , location.bottom , na , text = "?" , textcolor = sesa_css , size = size.tiny , display = display.all - display.status_line , editable = false)
 
 //Plot Divider B
-plotshape(is_sesb and show_ses_div and show_sesb and showSessions, "·"
-  , shape.labelup
-  , location.bottom
-  , na
-  , text = "."
-  , textcolor = sesb_css
-  , size = size.tiny
-  , display = display.all - display.status_line
-  , editable = false)
+plotshape(is_sesb and show_ses_div and show_sesb and showSessions, "·" , shape.labelup , location.bottom , na , text = "." , textcolor = sesb_css , size = size.tiny , display = display.all - display.status_line , editable = false)
 
-plotshape(is_sesb != is_sesb[1] and show_ses_div and show_sesb and showSessions,
-"LDN"
-  ,     shape.labelup
-  ,     location.bottom
-  ,     na
-  ,     text = "?"
-  ,     textcolor = sesb_css
-  ,     size = size.tiny
-  ,     display = display.all - display.status_line
-  ,     editable = false)
+plotshape(is_sesb != is_sesb[1] and show_ses_div and show_sesb and showSessions, "LDN" ,     shape.labelup ,     location.bottom ,     na ,     text = "?" ,     textcolor = sesb_css ,     size = size.tiny ,     display = display.all - display.status_line ,     editable = false)
 
 
 // # ============================[FUNCTIONS]============================ #
@@ -374,8 +333,7 @@ macdSignalLength = 9
     macdSlowLength := 25
     macdSignalLength:=8
 
-[MacdX, signalX, histX] = ta.macd(close, macdFastLength, macdSlowLength,
-macdSignalLength)
+[MacdX, signalX, histX] = ta.macd(close, macdFastLength, macdSlowLength, macdSignalLength)
 
 //candle color scheme
 greenHigh = #4ce653
@@ -455,20 +413,14 @@ barcolor(candleColorType == 'None' ? na : candleBody, editable = false)
 
 // # ============================[SMART TRAIL]============================ #
 [smartTrailLine, fillerLine, smartTrailDirection] = LAF.getSmartTrail(10, 4, 8)
-smartTrail1 = plot(smartTrail ? smartTrailLine : na, "Smart Trail", style =
-plot.style_line, color = smartTrailDirection== 'long' ? color.new(#2157f9, 0) :
-smartTrailDirection == 'short' ? color.new(#ff1100, 0) : na, editable = false)
-smartTrail2 = plot(smartTrail ? fillerLine : na, "Fib 2", style = plot.style_line,
-transp = 100, editable = false)
-fill(smartTrail1, smartTrail2, color = smartTrailDirection == 'long' ?
-color.new(#2157f9, 80) : smartTrailDirection == 'short' ? color.new(#ff1100, 80) :
-na, editable = false)
+smartTrail1 = plot(smartTrail ? smartTrailLine : na, "Smart Trail", style = plot.style_line, color = smartTrailDirection== 'long' ? color.new(#2157f9, 0) : smartTrailDirection == 'short' ? color.new(#ff1100, 0) : na, editable = false)
+smartTrail2 = plot(smartTrail ? fillerLine : na, "Fib 2", style = plot.style_line, transp = 100, editable = false)
+fill(smartTrail1, smartTrail2, color = smartTrailDirection == 'long' ? color.new(#2157f9, 80) : smartTrailDirection == 'short' ? color.new(#ff1100, 80) : na, editable = false)
 
 // # ============================[TREND CATCHER]============================ #
 [trendCatcherLine, trendCatcherColor] = LAF.getTrendCatcher()
 newTrendCatcherColor = trendCatcherColor == color.blue ? #02ff65 : #ff1100
-plot(trendCatcher ? trendCatcherLine : na, title='Trend Catcher', linewidth=2,
-color=newTrendCatcherColor, editable = false)
+plot(trendCatcher ? trendCatcherLine : na, title='Trend Catcher', linewidth=2, color=newTrendCatcherColor, editable = false)
 
 // # ============================[NEO CLOUD]============================ #
 
@@ -476,14 +428,12 @@ color=newTrendCatcherColor, editable = false)
 
 // # ============================[TREND TRACER]============================ #
 [trendTracerLine, trendTracerDirection] = LAF.getTrendTracer()
-plot (trendTracer ? trendTracerLine : na, title='Trend Tracer', linewidth=2,
-style=plot.style_cross, color = trendTracerDirection, editable = false)
+plot (trendTracer ? trendTracerLine : na, title='Trend Tracer', linewidth=2, style=plot.style_cross, color = trendTracerDirection, editable = false)
 
-// # ============================[DASHBOARD
-COMPONENTS|]============================ #
+// # ============================[DASHBOARD COMPONENTS]============================ #
 trendStrengthMetric = math.abs(LAF.getTrendStrengthMetric(14, 'RMA', 21, 'EMA'))
 trendStrengthMetric := trendStrengthMetric*2.5
-trendIndication = trendStrengthMetric > 30 ? "??" : "??"
+trendIndication = trendStrengthMetric > 30 ? "UP" : "DN"
 trendStrengthCellColor = newTrendCatcherColor == #02ff65 ?
 dashboardGreenBackground: dashboardRedBackground
 trendStrengthTextColor = trendStrengthCellColor == dashboardGreenBackground ?
@@ -493,7 +443,7 @@ volatilityMetric = LAF.getVolatilityMetric()
 volatilityMetric2 = ta.sma(LAF.getVolatilityMetric(), 8)
 volatilityText = volatilityMetric < 30 ? 'Stable' : volatilityMetric < 80 ?
 'Moderate' : 'Volatile'
-volatilityEmoji = volatilityMetric2 > volatilityMetric ? '??' : '??'
+volatilityEmoji = volatilityMetric2 > volatilityMetric ? 'UP' : 'DN'
 volatilityCellColor = newTrendCatcherColor == #02ff65 ? dashboardGreenBackground :
 dashboardRedBackground
 VolatilityTextColor = trendStrengthCellColor == dashboardGreenBackground ?
@@ -528,39 +478,21 @@ table_size = dashboardSize == 'Tiny' ? size.tiny
   : dashboardSize == 'Small' ? size.small
   : size.normal
 
-tb = table.new(table_position, 7, 7
-  , bgcolor = #1e222d
-  , border_color = #373a46
-  , border_width = 1
-  , frame_color = #373a46
-  , frame_width = 1)
+tb = table.new(table_position, 7, 7 , bgcolor = #1e222d , border_color = #373a46 , border_width = 1 , frame_color = #373a46 , frame_width = 1)
 
 if showDashboard
     if barstate.islast
-        tb.cell(0, 2, autopilotMode == 'Off' ? "?? Optimal Sensivity" : "??
-Autopilot Enabled", text_color = color.white, text_size = table_size, text_halign =
-text.align_left)
-        tb.cell(0, 3, str.tostring(trendIndication) + "Trend Strength", text_color
-= color.white, text_size = table_size, text_halign = text.align_left)
-        tb.cell(0, 4, volatilityEmoji+ " Lux Volatility", text_color = color.white,
-text_size = table_size, text_halign = text.align_left)
-        tb.cell(0, 5, "?? Squeeze", text_color = color.white, text_size =
-table_size, text_halign = text.align_left)
-        tb.cell(0, 6, "?? Volume Sentiment", text_color = color.white, text_size =
-table_size, text_halign = text.align_left)
+        tb.cell(0, 2, autopilotMode == 'Off' ? "Optimal Sensivity" : "Autopilot Enabled", text_color = color.white, text_size = table_size, text_halign = text.align_left)
+        tb.cell(0, 3, str.tostring(trendIndication) + "Trend Strength", text_color = color.white, text_size = table_size, text_halign = text.align_left)
+        tb.cell(0, 4, volatilityEmoji+ " Lux Volatility", text_color = color.white, text_size = table_size, text_halign = text.align_left)
+        tb.cell(0, 5, "Squeeze", text_color = color.white, text_size = table_size, text_halign = text.align_left)
+        tb.cell(0, 6, "Volume Sentiment", text_color = color.white, text_size = table_size, text_halign = text.align_left)
 
-        tb.cell(1, 2, autopilotMode, text_color = color.white, text_size =
-table_size)
-        tb.cell(1, 3, str.tostring(trendStrengthMetric, format.percent),
-text_color=trendStrengthTextColor, text_size=table_size, bgcolor =
-trendStrengthCellColor)
-        tb.cell(1, 4, volatilityText, text_color = VolatilityTextColor, text_size =
-table_size, bgcolor = volatilityCellColor)
-        tb.cell(1, 5, str.tostring(squeezeMetric, format.percent), text_color=
-squeezeTextColor, text_size=table_size, bgcolor = squeezeCellColor)
-        tb.cell(1, 6, str.tostring(math.min(volumeSentiment, 100.),
-format.percent), text_color = volumeTextColor, text_size = table_size, bgcolor =
-volumeCellColor)
+        tb.cell(1, 2, autopilotMode, text_color = color.white, text_size = table_size)
+        tb.cell(1, 3, str.tostring(trendStrengthMetric, format.percent), text_color=trendStrengthTextColor, text_size=table_size, bgcolor = trendStrengthCellColor)
+        tb.cell(1, 4, volatilityText, text_color = VolatilityTextColor, text_size = table_size, bgcolor = volatilityCellColor)
+        tb.cell(1, 5, str.tostring(squeezeMetric, format.percent), text_color= squeezeTextColor, text_size=table_size, bgcolor = squeezeCellColor)
+        tb.cell(1, 6, str.tostring(math.min(volumeSentiment, 100.), format.percent), text_color = volumeTextColor, text_size = table_size, bgcolor = volumeCellColor)
 
 //
 ***********************************************************************************
@@ -691,9 +623,7 @@ supersmoother(_src, _length) =>
 //-----------------------
 // ————— Converts current chart resolution into a float minutes value.
 f_resInMinutes() =>
-    _resInMinutes = timeframe.multiplier * (timeframe.isseconds ? 1. / 60 :
-timeframe.isminutes ? 1. : timeframe.isdaily ? 60. * 24 : timeframe.isweekly ? 60.
-* 24 * 7 : timeframe.ismonthly ? 60. * 24 * 30.4375 : na)
+    _resInMinutes = timeframe.multiplier * (timeframe.isseconds ? 1. / 60 : timeframe.isminutes ? 1. : timeframe.isdaily ? 60. * 24 : timeframe.isweekly ? 60. * 24 * 7 : timeframe.ismonthly ? 60. * 24 * 30.4375 : na)
     _resInMinutes
 
 get_tf(_lvl) =>
@@ -848,16 +778,10 @@ format_price(x) =>
     y
 
 f_PriceLine(_ref, linecol) =>
-    line.new(x1=bar_index, x2=bar_index - 1, y1=_ref, y2=_ref, extend=extend.left,
-color=linecol)
+    line.new(x1=bar_index, x2=bar_index - 1, y1=_ref, y2=_ref, extend=extend.left, color=linecol)
 
 f_MTFLabel(_txt, _yloc) =>
-    label.new(x=time + math.round(ta.change(time) * 20), y=_yloc,
-xloc=xloc.bar_time, text=mtf_disp_typ == 'Always Display' ? _txt : 'Check MTF',
-tooltip=mtf_disp_typ == 'Always Display' ? '' : _txt, color=color.black,
-textcolor=color.white, size=size.normal, style=mtf_disp_typ == 'On Hover' and
-displayline ? label.style_label_lower_left : label.style_label_left,
-textalign=text.align_left)
+    label.new(x=time + math.round(ta.change(time) * 20), y=_yloc, xloc=xloc.bar_time, text=mtf_disp_typ == 'Always Display' ? _txt : 'Check MTF', tooltip=mtf_disp_typ == 'Always Display' ? '' : _txt, color=color.black, textcolor=color.white, size=size.normal, style=mtf_disp_typ == 'On Hover' and displayline ? label.style_label_lower_left : label.style_label_left, textalign=text.align_left)
 
 //} Function End
 
@@ -891,16 +815,11 @@ float p_loband1 = drawchannel ? loband1 : na
 float p_upband2 = drawchannel ? upband2 : na
 float p_loband2 = drawchannel ? loband2 : na
 
-z = plot(p_meanline, color=color.new(#FFCD00, 0), style=plot.style_line,
-title='Mean', linewidth=2)
-x1 = plot(p_upband1, color=color.new(color.green, 50), style=plot.style_circles,
-title='R1', linewidth=1)
-x2 = plot(p_loband1, color=color.new(color.green, 50), style=plot.style_circles,
-title='S1', linewidth=1)
-y1 = plot(p_upband2, color=color.new(color.red, 50), style=plot.style_line,
-title='R2', linewidth=1)
-y2 = plot(p_loband2, color=color.new(color.red, 50), style=plot.style_line,
-title='S2', linewidth=1)
+z = plot(p_meanline, color=color.new(#FFCD00, 0), style=plot.style_line, title='Mean', linewidth=2)
+x1 = plot(p_upband1, color=color.new(color.green, 50), style=plot.style_circles, title='R1', linewidth=1)
+x2 = plot(p_loband1, color=color.new(color.green, 50), style=plot.style_circles, title='S1', linewidth=1)
+y1 = plot(p_upband2, color=color.new(color.red, 50), style=plot.style_line, title='R2', linewidth=1)
+y2 = plot(p_loband2, color=color.new(color.red, 50), style=plot.style_line, title='S2', linewidth=1)
 
 //-----------------------
 // Draw zone
@@ -952,18 +871,12 @@ float upband2_9 = drawchannel   and displayzone   ? upband2 + meanrange * gradsi
 float loband2_9 = drawchannel and displayzone ?   loband2 - meanrange * gradsize * -4
 : na
 
-up1 = plot(reversalZone         ? upband2_1 : na, color = color.black, transp =
-100, editable = false)
-up2 = plot(reversalZone         ?upband2_5:na, color = color.black, transp = 100,
-editable = false)
-up3 = plot(reversalZone         ?upband2_9:na, color = color.black, transp = 100,
-editable = false)
-dp1 = plot(reversalZone         ?loband2_1:na, color = color.black, transp = 100,
-editable = false)
-dp2 = plot(reversalZone          ?loband2_5:na, color = color.black, transp = 100,
-editable = false)
-dp3 = plot(reversalZone          ?loband2_9:na, color = color.black, transp = 100,
-editable = false)
+up1 = plot(reversalZone         ? upband2_1 : na, color = color.black, transp = 100, editable = false)
+up2 = plot(reversalZone         ?upband2_5:na, color = color.black, transp = 100, editable = false)
+up3 = plot(reversalZone         ?upband2_9:na, color = color.black, transp = 100, editable = false)
+dp1 = plot(reversalZone         ?loband2_1:na, color = color.black, transp = 100, editable = false)
+dp2 = plot(reversalZone          ?loband2_5:na, color = color.black, transp = 100, editable = false)
+dp3 = plot(reversalZone          ?loband2_9:na, color = color.black, transp = 100, editable = false)
 
 fill(up1,    up2,   color   =   #56202d,   transp   =   20,   editable   =   false)
 fill(up2,    up3,   color   =   #3f1d29,   transp   =   60,   editable   =   false)
@@ -1022,16 +935,12 @@ chikou_css = #7b1fa2
 plot(neoCloud ? kijun : na,'Kijun-Sen',kijun_css, editable = false)
 
 
-plot(neoCloud and ta.crossover(tenkan,kijun) ? kijun :
-na,'Crossover',#2156f300,3,plot.style_circles, editable = false)
-plot(neoCloud and ta.crossunder(tenkan,kijun) ? kijun :
-na,'Crossunder',#ff5e0000,3,plot.style_circles, editable = false)
+plot(neoCloud and ta.crossover(tenkan,kijun) ? kijun : na,'Crossover',#2156f300,3,plot.style_circles, editable = false)
+plot(neoCloud and ta.crossunder(tenkan,kijun) ? kijun : na,'Crossunder',#ff5e0000,3,plot.style_circles, editable = false)
 
 
-A = plot(neoCloud ? senkouA: na,'Senkou Span A',na,offset=offset-1, editable =
-false)
-B = plot(neoCloud ? senkouB : na,'Senkou Span B',na,offset=offset-1, editable =
-false)
+A = plot(neoCloud ? senkouA: na,'Senkou Span A',na,offset=offset-1, editable = false)
+B = plot(neoCloud ? senkouB : na,'Senkou Span B',na,offset=offset-1, editable = false)
 fill(A,B,senkouA > senkouB ? cloud_a : cloud_b)
 
 lastNeo = int(senkouA + senkouB)
@@ -1040,8 +949,7 @@ last5Neo = ta.sma(lastNeo, 2)
 
 
 
-plot(close,'Chikou',chikou_css,offset=-offset+1,display=display.none, editable
-=false)
+plot(close,'Chikou',chikou_css,offset=-offset+1,display=display.none, editable =false)
 
 //@version=5
 indicator("Meu Indicador", overlay=true)
@@ -1053,37 +961,20 @@ rtp1 = bar_index + 40
 [lowBound, midBound, highBound] = LAF.getTPSLBoxes(6.0)
 
 // Stwórz rzeczywisty kwadrat
-tp1box = box.new( left=ltp1, top=close + highBound, right=rtp1, bottom=close +
-midBound, border_color=color.new(#3666f5, 0), border_width=2,
-border_style=line.style_solid, bgcolor=color.new(#3666f5, 53), text="TP1 : " +
-str.tostring(close), text_size=size.large, text_color=color.new(#3666f5, 0),
-text_wrap=text.wrap_auto)
+tp1box = box.new( left=ltp1, top=close + highBound, right=rtp1, bottom=close + midBound, border_color=color.new(#3666f5, 0), border_width=2, border_style=line.style_solid, bgcolor=color.new(#3666f5, 53), text="TP1 : " + str.tostring(close), text_size=size.large, text_color=color.new(#3666f5, 0), text_wrap=text.wrap_auto)
 
 // Variável para armazenar caixas
 var boxes = array.new<box>()
 
 // Adicionando uma caixa ao array
-boxes.push(box.new(left=ltp1, top=close + highBound, right=rtp1, bottom=close +
-midBound, border_color=#3666f5, border_width=2, border_style=line.style_solid,
-bgcolor=color.new(#3666f5, 70), text="TP/SL 2 : " + str.tostring(close),
-text_size=size.large, text_color=color.new(#3666f5, 0), text_wrap=text.wrap_auto))
+boxes.push(box.new(left=ltp1, top=close + highBound, right=rtp1, bottom=close + midBound, border_color=#3666f5, border_width=2, border_style=line.style_solid, bgcolor=color.new(#3666f5, 70), text="TP/SL 2 : " + str.tostring(close), text_size=size.large, text_color=color.new(#3666f5, 0), text_wrap=text.wrap_auto))
 
-boxes.push(box.new(left=ltp1, top=close + midBound, right=rtp1, bottom=close +
-lowBound, border_color=#3666f5, border_width=2,border_style=line.style_solid,
-bgcolor=color.new(#3666f5, 40), text="TP/SL 1 : " + str.tostring(close),
-text_size=size.large, text_color=color.new(#3666f5, 0), text_wrap=text.wrap_auto))
+boxes.push(box.new(left=ltp1, top=close + midBound, right=rtp1, bottom=close + lowBound, border_color=#3666f5, border_width=2,border_style=line.style_solid, bgcolor=color.new(#3666f5, 40), text="TP/SL 1 : " + str.tostring(close), text_size=size.large, text_color=color.new(#3666f5, 0), text_wrap=text.wrap_auto))
 
 // SL1 e SL2 caixas
-SL1 = box.new(left=ltp1, top=close - highBound, right=rtp1, bottom=close -
-midBound, border_color=#3666f5, border_width=2, border_style=line.style_solid,
-bgcolor=color.new(#3666f5, 70), text="TP/SL 2 : " + str.tostring(close),
-text_size=size.large, text_color=color.new(#3666f5, 0), text_wrap=text.wrap_auto)
+SL1 = box.new(left=ltp1, top=close - highBound, right=rtp1, bottom=close - midBound, border_color=#3666f5, border_width=2, border_style=line.style_solid, bgcolor=color.new(#3666f5, 70), text="TP/SL 2 : " + str.tostring(close), text_size=size.large, text_color=color.new(#3666f5, 0), text_wrap=text.wrap_auto)
 
-SL2 = box.new(left=ltp1, top=close - midBound, right=rtp1, bottom=close - lowBound,
-border_color=#3666f5, border_width=2,
-border_style=line.style_solid,bgcolor=color.new(#3666f5, 40), text="TP/SL 1 : " +
-str.tostring(close),text_size=size.large, text_color=color.new(#3666f5, 0),
-text_wrap=text.wrap_auto)
+SL2 = box.new(left=ltp1, top=close - midBound, right=rtp1, bottom=close - lowBound, border_color=#3666f5, border_width=2, border_style=line.style_solid,bgcolor=color.new(#3666f5, 40), text="TP/SL 1 : " + str.tostring(close),text_size=size.large, text_color=color.new(#3666f5, 0), text_wrap=text.wrap_auto)
 
 // Usun poprzednie ramki (Remover caixas antigas)
 if array.size(boxes) > 0
@@ -1283,20 +1174,16 @@ getColorGradientFromSteps(_source, _center, _steps, weakColor, strongColor) =>
     bool _dn = _chg < 0
     bool _srcBull = _source > _center
     bool _srcBear = _source < _center
-    _qtyAdvDec := _srcBull ? _xUp ? 1 : _up ? math.min(_maxSteps, _qtyAdvDec +
-1) :_dn ? math.max(1, _qtyAdvDec - 1) : _qtyAdvDec : _srcBear ? _xDn ? 1 : _dn ?
+    _qtyAdvDec := _srcBull ? _xUp ? 1 : _up ? math.min(_maxSteps, _qtyAdvDec + 1) :_dn ? math.max(1, _qtyAdvDec - 1) : _qtyAdvDec : _srcBear ? _xDn ? 1 : _dn ?
 math.min(_maxSteps, _qtyAdvDec + 1) : _up ? math.max(1, _qtyAdvDec - 1) :
 _qtyAdvDec : _qtyAdvDec
-    color colorGradient = color.from_gradient(_qtyAdvDec, 1, _maxSteps, weakColor,
-strongColor)
+    color colorGradient = color.from_gradient(_qtyAdvDec, 1, _maxSteps, weakColor, strongColor)
     colorGradient
 
 getColorGradientFromSource(series, _min, _max, weakColor, strongColor) =>
     var float baseLineSeries = _min + (_max - _min) / 2
     color colorGradient = series >= baseLineSeries ?
-color.from_gradient(value=series, bottom_value=baseLineSeries, top_value=_max,
-bottom_color=weakColor, top_color=strongColor): color.from_gradient(series, _min,
-baseLineSeries, strongColor, weakColor)
+color.from_gradient(value=series, bottom_value=baseLineSeries, top_value=_max, bottom_color=weakColor, top_color=strongColor): color.from_gradient(series, _min, baseLineSeries, strongColor, weakColor)
     colorGradient
 
 // ================================
@@ -1304,8 +1191,7 @@ baseLineSeries, strongColor, weakColor)
 // ================================
 normalizeDeriv(_src, _quadraticMeanLength) =>
     float derivative = _src - _src[2]
-    quadraticMean = math.sqrt(nz(math.sum(math.pow(derivative, 2),
-_quadraticMeanLength) / _quadraticMeanLength))
+    quadraticMean = math.sqrt(nz(math.sum(math.pow(derivative, 2), _quadraticMeanLength) / _quadraticMeanLength))
     derivative/quadraticMean
 
 tanh(series float _src) =>
@@ -1358,63 +1244,32 @@ seriesSlowMirror = useMirror ? -seriesSlow + 2*offsetSlow : na
 // Fast Color Gradients (Areas and Lines)
 fastBaseColor = getPlotColor(signalFast, fastBullishColor, fastBearishColor)
 fastBaseColorInverse = getPlotColor(signalFast, fastBearishColor, fastBullishColor)
-fastAreaGradientFromSource = getColorGradientFromSource(seriesFast, -1.+offsetFast,
-1+offsetFast, color.new(fastBaseColor, areaFastTrans), fastBaseColor)
-fastAreaGradientFromSteps = getColorGradientFromSteps(seriesFast, offsetFast,
-maxStepsForGradient, color.new(fastBaseColor, areaFastTrans), fastBaseColor)
-fastLineGradientFromSource = getColorGradientFromSource(seriesFast, -1+offsetFast,
-1+offsetFast, color.new(fastBaseColor, lineFastTrans), fastBaseColor)
-fastLineGradientFromSteps = getColorGradientFromSteps(seriesFast, offsetFast,
-maxStepsForGradient, color.new(fastBaseColor, lineFastTrans), fastBaseColor)
-fastAreaGradientFromSourceInverse = getColorGradientFromSource(seriesFast, -
-1.+offsetFast, 1+offsetFast, color.new(fastBaseColorInverse, areaFastTrans),
-fastBaseColorInverse)
-fastAreaGradientFromStepsInverse = getColorGradientFromSteps(seriesFast,
-offsetFast, maxStepsForGradient, color.new(fastBaseColorInverse, areaFastTrans),
-fastBaseColorInverse)
+fastAreaGradientFromSource = getColorGradientFromSource(seriesFast, -1.+offsetFast, 1+offsetFast, color.new(fastBaseColor, areaFastTrans), fastBaseColor)
+fastAreaGradientFromSteps = getColorGradientFromSteps(seriesFast, offsetFast, maxStepsForGradient, color.new(fastBaseColor, areaFastTrans), fastBaseColor)
+fastLineGradientFromSource = getColorGradientFromSource(seriesFast, -1+offsetFast, 1+offsetFast, color.new(fastBaseColor, lineFastTrans), fastBaseColor)
+fastLineGradientFromSteps = getColorGradientFromSteps(seriesFast, offsetFast, maxStepsForGradient, color.new(fastBaseColor, lineFastTrans), fastBaseColor)
+fastAreaGradientFromSourceInverse = getColorGradientFromSource(seriesFast, - 1.+offsetFast, 1+offsetFast, color.new(fastBaseColorInverse, areaFastTrans), fastBaseColorInverse)
+fastAreaGradientFromStepsInverse = getColorGradientFromSteps(seriesFast, offsetFast, maxStepsForGradient, color.new(fastBaseColorInverse, areaFastTrans), fastBaseColorInverse)
 
 // Normal Color Gradients (Areas and Lines)
-normalBaseColor = getPlotColor(signalNormal, normalBullishColor,
-normalBearishColor)
-normalBaseColorInverse = getPlotColor(signalNormal, normalBearishColor,
-normalBullishColor)
-normalAreaGradientFromSource = getColorGradientFromSource(seriesNormal, -
-1.+offsetNormal, 1.+offsetNormal, color.new(normalBaseColor, areaNormalTrans),
-normalBaseColor)
-normalAreaGradientFromSteps = getColorGradientFromSteps(seriesNormal, offsetNormal,
-maxStepsForGradient, color.new(normalBaseColor, areaNormalTrans), normalBaseColor)
-normalLineGradientFromSource = getColorGradientFromSource(seriesNormal, -
-1+offsetNormal, 1+offsetNormal, color.new(normalBaseColor, lineNormalTrans),
-normalBaseColor)
-normalLineGradientFromSteps = getColorGradientFromSteps(seriesNormal, offsetNormal,
-maxStepsForGradient, color.new(normalBaseColor, lineNormalTrans), normalBaseColor)
-normalAreaGradientFromSourceInverse = getColorGradientFromSource(seriesNormal, -
-1.+offsetNormal, 1.+offsetNormal, color.new(normalBaseColorInverse,
-areaNormalTrans), normalBaseColorInverse)
-normalAreaGradientFromStepsInverse = getColorGradientFromSteps(seriesNormal,
-offsetNormal, maxStepsForGradient, color.new(normalBaseColorInverse,
-areaNormalTrans), normalBaseColorInverse)
+normalBaseColor = getPlotColor(signalNormal, normalBullishColor, normalBearishColor)
+normalBaseColorInverse = getPlotColor(signalNormal, normalBearishColor, normalBullishColor)
+normalAreaGradientFromSource = getColorGradientFromSource(seriesNormal, - 1.+offsetNormal, 1.+offsetNormal, color.new(normalBaseColor, areaNormalTrans), normalBaseColor)
+normalAreaGradientFromSteps = getColorGradientFromSteps(seriesNormal, offsetNormal, maxStepsForGradient, color.new(normalBaseColor, areaNormalTrans), normalBaseColor)
+normalLineGradientFromSource = getColorGradientFromSource(seriesNormal, - 1+offsetNormal, 1+offsetNormal, color.new(normalBaseColor, lineNormalTrans), normalBaseColor)
+normalLineGradientFromSteps = getColorGradientFromSteps(seriesNormal, offsetNormal, maxStepsForGradient, color.new(normalBaseColor, lineNormalTrans), normalBaseColor)
+normalAreaGradientFromSourceInverse = getColorGradientFromSource(seriesNormal, - 1.+offsetNormal, 1.+offsetNormal, color.new(normalBaseColorInverse, areaNormalTrans), normalBaseColorInverse)
+normalAreaGradientFromStepsInverse = getColorGradientFromSteps(seriesNormal, offsetNormal, maxStepsForGradient, color.new(normalBaseColorInverse, areaNormalTrans), normalBaseColorInverse)
 
 // Slow Color Gradients (Areas and Lines)
 slowBaseColor = getPlotColor(signalSlow, slowBullishColor, slowBearishColor)
 slowBaseColorInverse = getPlotColor(signalSlow, slowBearishColor, slowBullishColor)
-slowAreaGradientFromSource = getColorGradientFromSource(seriesSlow, -
-1.75+offsetSlow, 1.75+offsetSlow, color.new(slowBaseColor, areaSlowTrans),
-slowBaseColor)
-slowAreaGradientFromSteps = getColorGradientFromSteps(seriesSlow,
-offsetSlow,maxStepsForGradient, color.new(slowBaseColor, areaSlowTrans),
-slowBaseColor)
-slowLineGradientFromSource = getColorGradientFromSource(seriesSlow, -
-1.75+offsetSlow, 1.75+offsetSlow, color.new(slowBaseColor, lineSlowTrans),
-slowBaseColor)
-slowLineGradientFromSteps = getColorGradientFromSteps(seriesSlow, offsetSlow,
-maxStepsForGradient, color.new(slowBaseColor, lineSlowTrans), slowBaseColor)
-slowAreaGradientFromSourceInverse = getColorGradientFromSource(seriesSlow, -
-1.75+offsetSlow, 1.75+offsetSlow, color.new(slowBaseColorInverse, areaSlowTrans),
-slowBaseColorInverse)
-slowAreaGradientFromStepsInverse = getColorGradientFromSteps(seriesSlow,
-offsetSlow, maxStepsForGradient, color.new(slowBaseColorInverse, areaSlowTrans),
-slowBaseColorInverse)
+slowAreaGradientFromSource = getColorGradientFromSource(seriesSlow, - 1.75+offsetSlow, 1.75+offsetSlow, color.new(slowBaseColor, areaSlowTrans), slowBaseColor)
+slowAreaGradientFromSteps = getColorGradientFromSteps(seriesSlow, offsetSlow,maxStepsForGradient, color.new(slowBaseColor, areaSlowTrans), slowBaseColor)
+slowLineGradientFromSource = getColorGradientFromSource(seriesSlow, - 1.75+offsetSlow, 1.75+offsetSlow, color.new(slowBaseColor, lineSlowTrans), slowBaseColor)
+slowLineGradientFromSteps = getColorGradientFromSteps(seriesSlow, offsetSlow, maxStepsForGradient, color.new(slowBaseColor, lineSlowTrans), slowBaseColor)
+slowAreaGradientFromSourceInverse = getColorGradientFromSource(seriesSlow, - 1.75+offsetSlow, 1.75+offsetSlow, color.new(slowBaseColorInverse, areaSlowTrans), slowBaseColorInverse)
+slowAreaGradientFromStepsInverse = getColorGradientFromSteps(seriesSlow, offsetSlow, maxStepsForGradient, color.new(slowBaseColorInverse, areaSlowTrans), slowBaseColorInverse)
 
 // =========================================
 // ==== Plot Parameters and Logic Gates ====
@@ -1425,12 +1280,9 @@ isNormal   = speedToEmphasize == "Normal"
 isFast =   speedToEmphasize == "Fast"
 
 // Series Colors
-seriesSlowColor = showOsc or isSlow ? color.new(slowLineGradientFromSource,
-lineSlowTrans) : na
-seriesNormalColor = showOsc or isNormal ? color.new(normalLineGradientFromSource,
-lineNormalTrans) : na
-seriesFastColor = showOsc or isFast ? color.new(fastLineGradientFromSource,
-lineFastTrans) : na
+seriesSlowColor = showOsc or isSlow ? color.new(slowLineGradientFromSource, lineSlowTrans) : na
+seriesNormalColor = showOsc or isNormal ? color.new(normalLineGradientFromSource, lineNormalTrans) : na
+seriesFastColor = showOsc or isFast ? color.new(fastLineGradientFromSource, lineFastTrans) : na
 seriesSlowMirrorColor = useMirror ? seriesSlowColor : na
 seriesNormalMirrorColor = useMirror ? seriesNormalColor : na
 seriesFastMirrorColor = useMirror ? seriesFastColor : na
@@ -1473,10 +1325,8 @@ fastBearishMedianCross = ta.crossunder(seriesFast, 0)
 fastBullishMedianCross = ta.crossover(seriesFast, 0)
 
 // Last Crossover Values
-lastBearishCrossValue = ta.valuewhen(condition=bearishCross, source=seriesNormal,
-occurrence=1)
-lastBullishCrossValue = ta.valuewhen(condition=bullishCross , source=seriesNormal,
-occurrence=1)
+lastBearishCrossValue = ta.valuewhen(condition=bearishCross, source=seriesNormal, occurrence=1)
+lastBullishCrossValue = ta.valuewhen(condition=bullishCross , source=seriesNormal, occurrence=1)
 // Trigger Wave Size Comparison
 triggerWaveFactor = sizePercent/100
 isSmallerBearishCross = bearishCross and seriesNormal < lastBearishCrossValue *
@@ -1635,10 +1485,8 @@ var array<vector> perfclusters = na
 
 if last_bar_index - bar_index <= maxData
     for _ = 0 to maxIter
-        factors_clusters := array.from(vector.new(array.new<float>(0)),
-vector.new(array.new<float>(0)), vector.new(array.new<float>(0)))
-        perfclusters := array.from(vector.new(array.new<float>(0)),
-vector.new(array.new<float>(0)), vector.new(array.new<float>(0)))
+        factors_clusters := array.from(vector.new(array.new<float>(0)), vector.new(array.new<float>(0)), vector.new(array.new<float>(0)))
+        perfclusters := array.from(vector.new(array.new<float>(0)), vector.new(array.new<float>(0)), vector.new(array.new<float>(0)))
 
         //Assign value to cluster
         i = 0
