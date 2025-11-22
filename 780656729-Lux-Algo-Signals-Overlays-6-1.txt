@@ -1,6 +1,5 @@
 //@version=5
-indicator("Lux Algo Signals & Overlays™ [6.1]", "Lux Algo Signals & Overlays™
-[6.1]", overlay = true, max_labels_count = 500)
+indicator("Lux Algo Signals & Overlays [6.1]", "LuxAlgo", overlay = true, max_labels_count = 500)
 
 //Import libraries
 import ayvaliktrading/EyopsTelegram/1 as LAF
