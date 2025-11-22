@@ -10,9 +10,9 @@ groupBasic = "BASIC SETTINGS"
 showSignals = input(true, "Show Signals", inline = "1", group = groupBasic, tooltip = "Enables or disables the signals")
 signalPresets = input.string("None", "Presets / Filters", ["None", "Trend Trader [Preset]","Scalper [Preset]", "Swing Trader [Preset]", "Contrarian Trader [Preset]", "Smart Trail [Filter]", "Trend Tracer [Filter]", "Trend Strength [Filter]", "Trend Catcher [Filter]", "Neo Cloud [Filter]"],tooltip = "Automatically sets settings or filters for a given category", group= groupBasic)
 signalMode = input.string("Confirmation + Exits", "Signal Mode", ["Confirmation + Exits", "Contrarian + Exits", "None"],tooltip = "Changes the Mode of the signals" ,group = groupBasic)
-signalClassifier = input(true,"AI Signal Classifer",tooltip = "Shows signal quality from 1-4 on signals" ,group = groupBasic)
-sensitivity = input.float(5, "Signal Sensitivity ", minval = 1, maxval = 26,step=1, tooltip = "Changes the sensetivity of the signals, the lower this setting the more short term signals you will get, while a higher number will result in longer term signals.",group = groupBasic)
-atrLength = input.int(10, "Signal Tuner ", minval = 1, maxval = 25,step=1,tooltip = "Alows you to tune your signals, the higher the number the more refined but laggier the signal" ,group = groupBasic)
+signalClassifier = input(true,"AI Signal Classifier",tooltip = "Shows signal quality from 1-4 on signals" ,group = groupBasic)
+sensitivity = input.float(5, "Signal Sensitivity ", minval = 1, maxval = 26,step=1, tooltip = "Changes the sensitivity of the signals, the lower this setting the more short term signals you will get, while a higher number will result in longer term signals.",group = groupBasic)
+atrLength = input.int(10, "Signal Tuner ", minval = 1, maxval = 25,step=1,tooltip = "Allows you to tune your signals, the higher the number the more refined but laggier the signal" ,group = groupBasic)
 candleColorType = input.string("Confirmation Simple", "Candle Coloring", ["Confirmation Simple","Confirmation Gradient","Contrarian Gradient","None"],tooltip = "Changes the type of signal coloring", group = groupBasic)
 
 // Indicator Overlay Settings
@@ -31,7 +31,7 @@ showSessions = input(false, "Sessions", inline = "5", group = groupOverlay)
 groupAdvanced = "ADVANCED SETTINGS"
 takeProfitBoxes = input.string("Off", "TP/SL Points", options=["Off","On"], inline = "2", tooltip = "Shows Take Profit and Stop Loss areas",group = groupAdvanced)
 takeProfitStopLossDistance = input.int(5,"", minval = 1, maxval = 10, inline = "2", group=groupAdvanced)
-autopilotMode = input.string("Off", "Autopilot Sensivity",["Off","Short-Term", "Mid-Term", "Long-Term"],tooltip = "Sets automatic settings for signals and improves their quality" ,inline = "3", group = groupAdvanced)
+autopilotMode = input.string("Off", "Autopilot Sensitivity",["Off","Short-Term", "Mid-Term", "Long-Term"],tooltip = "Sets automatic settings for signals and improves their quality" ,inline = "3", group = groupAdvanced)
 dashboardLocation = input.string("Bottom Right","Dashboard Location", ["Top Right","Bottom Right","Bottom Left"], inline = "4",tooltip = "Changes dashboard positions" ,group = groupAdvanced)
 dashboardSize = input.string("Normal","Dashboard Size", ["Tiny","Small","Normal","Large"], inline = "5",tooltip = "Changes the size of the dashboard" ,group = groupAdvanced)
 
@@ -482,7 +482,7 @@ tb = table.new(table_position, 7, 7 , bgcolor = #1e222d , border_color = #373a46
 
 if showDashboard
     if barstate.islast
-        tb.cell(0, 2, autopilotMode == 'Off' ? "Optimal Sensivity" : "Autopilot Enabled", text_color = color.white, text_size = table_size, text_halign = text.align_left)
+        tb.cell(0, 2, autopilotMode == 'Off' ? "Optimal Sensitivity" : "Autopilot Enabled", text_color = color.white, text_size = table_size, text_halign = text.align_left)
         tb.cell(0, 3, str.tostring(trendIndication) + "Trend Strength", text_color = color.white, text_size = table_size, text_halign = text.align_left)
         tb.cell(0, 4, volatilityEmoji+ " Lux Volatility", text_color = color.white, text_size = table_size, text_halign = text.align_left)
         tb.cell(0, 5, "Squeeze", text_color = color.white, text_size = table_size, text_halign = text.align_left)
